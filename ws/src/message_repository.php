@@ -49,9 +49,11 @@ class MessageRepository
         return $data;
     }
 
-    public function getMessages(){
+    public function getMessages($room=null){
         $data = [];
         foreach ($this->table as $row){
+            if ($room && $row['room'] !== $room)
+                continue;
             $data[] = $row;
         }
         return $data;
@@ -63,10 +65,12 @@ class MessageRepository
      * @param $lefttime (created in last $lefttime hours)
      * @return array
      */
-    public function getLastMessages($user1, $user2, $lefttime){
+    public function getLastMessages($user1, $user2, $lefttime, $room=null){
         $data = [];
         $now = time();
         foreach ($this->table as $row){
+            if ($room && $row['room'] !== $room)
+                continue;
             if ($row['created'] < ($now - $lefttime * self::SEC_IN_HOUR))
                 continue;
             if (
@@ -115,6 +119,7 @@ class MessageRepository
         $this->table->column('created', swoole_table::TYPE_INT);
         $this->table->column('from', swoole_table::TYPE_STRING, 200);
         $this->table->column('to', swoole_table::TYPE_STRING, 200);
+        $this->table->column('room', swoole_table::TYPE_STRING, 200);
         $this->table->column('message', swoole_table::TYPE_STRING, self::MAX_MESSAGE_LEN);
         $this->table->create();
     }

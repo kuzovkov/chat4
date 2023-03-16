@@ -44,7 +44,7 @@ A.setEventHandlers= function(){
  * обработчик события connect
  **/
 A.connect = function(){
-    A.socket.send('user_connect', {nicname: A.nicname});
+    A.socket.send('user_connect', {nicname: A.nicname, room: ROOM});
 };
 
 /**

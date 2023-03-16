@@ -1,6 +1,6 @@
 <?php
 if (Auth::isAuth()){
-    header('Location: ' . '/');
+    header('Location: ' . '/room/'.$_POST['room']);
     exit();
 }
 

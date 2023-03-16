@@ -17,7 +17,13 @@ Socket.init = function(app){
     Socket.app = app;
     Socket.url = window.location.host;
     Socket.pathname = window.location.pathname;
-    var socketurl = (NICNAME)? "wss://" + window.location.host + `/ws/?nicname=${NICNAME}` : "wss://" + window.location.host + `/ws/`
+    var socketurl = "wss://" + window.location.host + `/ws/`;
+    if (NICNAME){
+        socketurl = "wss://" + window.location.host + `/ws/?nicname=${NICNAME}`;
+    }
+    if (NICNAME && ROOM){
+        socketurl = "wss://" + window.location.host + `/ws/?nicname=${NICNAME}&room=${ROOM}`;
+    }
     Socket.socket = new WebSocket(socketurl);
     Socket.socket.keepalive = true;
     Socket.hostname = window.location.hostname;

@@ -145,3 +145,5 @@ img#chat-preload {width: 64px;  height: 64px;  position: absolute;  top: 50%;  l
 #tabs {position: relative;}
 #tabs-2 {top: 40px; position: absolute; bottom: 50px; left: 10px; width: 90%;}
 #tabs-1 {top: 40px; position: absolute; bottom: 50px; left: 10px; width: 90%;}
+
+span.room {display: inline-block; font-size: 14px; text-decoration: none; margin-left: 20px;}

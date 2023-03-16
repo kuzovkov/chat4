@@ -1,4 +1,4 @@
-### webrtc chat with php backend
+### webrtc chat with php backend and rooms feature
 
 
 #### Install

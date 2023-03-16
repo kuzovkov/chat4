@@ -45,17 +45,21 @@ class UsersRepository
         return $users;
     }
 
-    public function getIdByNicname($nicname) {
+    public function getIdByNicname($nicname, $room=null) {
         foreach ($this->table as $id => $row){
-            if($row['nicname'] === $nicname)
+            if($room && $row['nicname'] === $nicname && $row['room'] === $room)
+                return $id;
+            else if ($row['nicname'] === $nicname)
                 return $id;
         }
         return null;
     }
 
-    public function getUsers(){
+    public function getUsers($room=null){
         $users = [];
         foreach ($this->table as $row){
+            if ($room && $row['room'] !== $room)
+                continue;
             $users[] = $row['nicname'];
         }
         return $users;
@@ -85,6 +89,7 @@ class UsersRepository
         }
         $this->table = new swoole_table(131072);
         $this->table->column('nicname', swoole_table::TYPE_STRING, 200);
+        $this->table->column('room', swoole_table::TYPE_STRING, 200);
         $this->table->create();
     }
 }
