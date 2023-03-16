@@ -4,9 +4,13 @@ if (Auth::isAuth()){
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nicname']) && strlen($_POST['nicname'])){
-    Auth::login($_POST['nicname']);
-    header('Location: ' . '/');
+if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
+    isset($_POST['nicname']) && strlen($_POST['nicname'])
+    && isset($_POST['room']) && strlen($_POST['room'])
+    && !in_array($_POST['room'], ['info', 'login', 'logout'])
+){
+    Auth::login($_POST['nicname'], $_POST['room']);
+    header('Location: ' . '/room/'.$_POST['room']);
     exit();
 }
 ?>
@@ -18,10 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nicname']) && strlen(
 
         <form method="post" action="/login" id="login-form">
             <div class="error"></div>
-            <label>Choose You NicName: </label>
+            <label>Choose You NicName and Room: </label>
             <div>
-                <input type="text" name="nicname"/>
-                <button>Choose</button>
+                <input type="text" name="nicname" placeholder="nicname"/>
+                <input type="text" name="room" placeholder="room"/>
+                <button>Go</button>
             </div>
         </form>
         <div class="header ui-widget-header">

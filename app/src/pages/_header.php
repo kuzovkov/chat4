@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.structure.min.css">
-    <script>var NICNAME = "<?=(isset($_COOKIE['nicname']))? $_COOKIE['nicname'] : 'null'?>";</script>
+    <script>
+        var NICNAME = "<?=(isset($_COOKIE['nicname']))? $_COOKIE['nicname'] : 'null'?>";
+        var ROOM = "<?=(isset($_COOKIE['room']))? $_COOKIE['room'] : 'null'?>";
+    </script>
     <script type="text/javascript" src="/vendor/jquery/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="/vendor/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/js/ui.js"></script>

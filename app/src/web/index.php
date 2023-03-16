@@ -6,7 +6,6 @@ $scripts = 'scripts/';
 $root_dir = ''; /*если скрипт не в корневом каталоге сервера*/
 
 $routes = [
-    '/' => $pages . 'index.php',
     '/login' => $pages . 'login.php',
     '/logout' => $scripts . 'logout.php',
     '/info' => $pages . 'info.php',
@@ -14,11 +13,12 @@ $routes = [
     '/file' => $scripts . 'download_file.php',
     '/file-del' => $scripts . 'delete_file.php',
     '/upload' => $scripts . 'upload.php',
+    '/room/:room' => $pages . 'index.php',
 
 ];
 
 
-
+//array_map(function ($key){return substr($key, 0, strpos($key, ':'));}, array_filter(array_keys($routes), function($key) {return strpos($key, ':') !== false;}))
 if (isset($_SERVER['REQUEST_URI'])){
 
     $real_uri = $_SERVER['REQUEST_URI'];
@@ -36,7 +36,6 @@ if (isset($_SERVER['REQUEST_URI'])){
     }
 
     if (!Auth::isAuth() && $uri != '/login' && $uri != '/auth') { header('Location: /login'); exit(); }
-
     if (isset($routes[$uri])){
         if(is_array($routes[$uri])){
             if (isset($routes[$uri][1]) && is_array($routes[$uri][1]))
@@ -46,8 +45,10 @@ if (isset($_SERVER['REQUEST_URI'])){
         }else{
             $require = '../' . $routes[$uri];
         }
-
-    }else{
+    }
+    else if (strpos($uri, '/room/') === 0){
+        $require = '../' . $routes['/room/:room'];
+    } else{
         $require = '../' . $routes['404'];
     }
 

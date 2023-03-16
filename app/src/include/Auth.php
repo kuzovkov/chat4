@@ -1,9 +1,10 @@
 <?php
 	class Auth{
 		
-		static public function login($login){
+		static public function login($login, $room){
             $domain = (isset($_SERVER['SERVER_NAME']))? substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.')) : ".kuzovkov12.ru";
 		    setrawcookie("nicname", $login , time() + (86400 * 30*356), "/" , $domain);
+		    setrawcookie("room", $room , time() + (86400 * 30*356), "/" , $domain);
 		}
 		
 
@@ -14,6 +15,7 @@
 		static public function logout(){
             $domain = (isset($_SERVER['SERVER_NAME']))? substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.')) : ".kuzovkov12.ru";
             setrawcookie("nicname", '' , time() - (86400 * 30*356), "/" , $domain);
+            setrawcookie("room", '' , time() - (86400 * 30*356), "/" , $domain);
 		}
 		
 		static public function checkPass($login, $pass){
@@ -26,7 +28,7 @@
 		}
 		
 		static public function isAuth(){
-            if (isset($_COOKIE['nicname']) && strlen($_COOKIE['nicname'])){
+            if (isset($_COOKIE['nicname']) && strlen($_COOKIE['nicname']) && isset($_COOKIE['room']) && strlen($_COOKIE['room'])){
                 return true;
             }
             return false;
