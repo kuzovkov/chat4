@@ -2,7 +2,7 @@
 	class Auth{
 		
 		static public function login($login, $room){
-            $domain = (isset($_SERVER['SERVER_NAME']))? substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.')) : ".kuzovkov12.ru";
+            $domain = (isset($_SERVER['SERVER_NAME']))? $_SERVER['SERVER_NAME'] : ".kuzovkov12.ru";
 		    setrawcookie("nicname", $login , time() + (86400 * 30*356), "/" , $domain);
 		    setrawcookie("room", $room , time() + (86400 * 30*356), "/" , $domain);
 		}
@@ -13,7 +13,7 @@
 		}
 
 		static public function logout(){
-            $domain = (isset($_SERVER['SERVER_NAME']))? substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.')) : ".kuzovkov12.ru";
+            $domain = (isset($_SERVER['SERVER_NAME']))? $_SERVER['SERVER_NAME'] : ".kuzovkov12.ru";
             setrawcookie("nicname", '' , time() - (86400 * 30*356), "/" , $domain);
             setrawcookie("room", '' , time() - (86400 * 30*356), "/" , $domain);
 		}
