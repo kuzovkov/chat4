@@ -18,8 +18,8 @@ Socket.init = function(app){
     Socket.url = window.location.host;
     Socket.pathname = window.location.pathname;
     var socketurl = "wss://" + window.location.host + `/ws/`;
-    if (NICNAME){
-        socketurl = "wss://" + window.location.host + `/ws/?nicname=${NICNAME}`;
+    if (ROOM){
+        socketurl = "wss://" + window.location.host + `/ws/?room=${ROOM}`;
     }
     if (NICNAME && ROOM){
         socketurl = "wss://" + window.location.host + `/ws/?nicname=${NICNAME}&room=${ROOM}`;

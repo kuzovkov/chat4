@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.structure.min.css">
     <script>var NICNAME = <?php if (isset($_COOKIE['nicname'])):?> "<?=$_COOKIE['nicname']?>"<?php else:?> null; <?php endif;?></script>
+    <script>var ROOM = <?php if (isset($_COOKIE['room'])):?> "<?=$_COOKIE['room']?>"<?php else:?> null; <?php endif;?></script>
     <script type="text/javascript" src="/js/socket.js"></script>
     <script type="text/javascript" src="/js/login.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
